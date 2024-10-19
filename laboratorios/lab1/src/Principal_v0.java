@@ -1,5 +1,6 @@
+
 /**
- * Lab0: Leitura de Base de Dados Não-Distribuida
+ * Lab0: Leitura de Base de Dados Nï¿½o-Distribuida
  * 
  * Autor: Lucio A. Rocha
  * Ultima atualizacao: 20/02/2023
@@ -12,18 +13,13 @@
 import java.io.*;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.security.SecureRandom;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
 import java.util.Scanner;
-import java.util.Set;
+
 
 public class Principal_v0 {
 
-	public final static Path path = Paths			
-			.get("src\\fortune-br.txt");
+	public final static Path path = Paths.get("c:\\Users\\guigo\\OneDrive\\Documentos\\GitHub\\Sistemas Distribuidos\\laboratorios\\lab1\\src\\fortune-br.txt");
 	private int NUM_FORTUNES = 0;
 
 	public class FileReader {
@@ -45,7 +41,7 @@ public class Principal_v0 {
 
 					line = br.readLine();
 
-				}// fim while
+				} // fim while
 
 				System.out.println(lineCount);
 			} catch (IOException e) {
@@ -79,26 +75,33 @@ public class Principal_v0 {
 					}
 
 					hm.put(lineCount, fortune.toString());
-					System.out.println(fortune.toString());
+					//System.out.println(fortune.toString());
 
-					System.out.println(lineCount);
-				}// fim while
+					//System.out.println(lineCount);
+				} // fim while
 
 			} catch (IOException e) {
 				System.out.println("SHOW: Excecao na leitura do arquivo.");
 			}
 		}
 
-		public void read(HashMap<Integer, String> hm)
-				throws FileNotFoundException {
+		public void read(HashMap<Integer, String> hm)throws FileNotFoundException {
 
-			//SEU CODIGO AQUI
+			// SEU CODIGO AQUI
 		}
 
-		public void write(HashMap<Integer, String> hm)
-				throws FileNotFoundException {
+		public void write(HashMap<Integer, String> hm) throws FileNotFoundException {
+			Scanner scanner = new Scanner(System.in);
+			System.out.println("Digite uma string para ser adicionada nas fortunas:");
+			String userInput = scanner.nextLine();
+			String novaFortuna = userInput + "\n%";
 
-			//SEU CODIGO AQUI
+			try (FileWriter writer = new FileWriter(path.toString(), true)) {
+				writer.write(novaFortuna + System.lineSeparator());
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			scanner.close();
 		}
 	}
 
@@ -106,11 +109,11 @@ public class Principal_v0 {
 
 		FileReader fr = new FileReader();
 		try {
-			NUM_FORTUNES = fr.countFortunes();
-			HashMap hm = new HashMap<Integer, String>();
+			//NUM_FORTUNES = fr.countFortunes();
+			HashMap<Integer, String> hm = new HashMap<>();
 			fr.parser(hm);
 			fr.read(hm);
-			fr.write(hm);
+			//fr.write(hm);
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
