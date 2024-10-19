@@ -15,6 +15,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Scanner;
+import java.util.Random;
 
 
 public class Principal_v0 {
@@ -86,8 +87,20 @@ public class Principal_v0 {
 		}
 
 		public void read(HashMap<Integer, String> hm)throws FileNotFoundException {
-
-			// SEU CODIGO AQUI
+			 // Verifica se o HashMap não está vazio
+			 if (hm.isEmpty()) {
+				System.out.println("Nenhuma fortuna foi encontrada.");
+			} else {
+				// Sorteia uma chave aleatória do HashMap
+				Random random = new Random();
+				int randomKey = random.nextInt(hm.size()); // Gera um número aleatório dentro do intervalo do HashMap
+				
+				// Recupera e exibe a fortuna correspondente à chave sorteada
+				System.out.println("-----");
+				System.out.println("Fortuna sorteada (" + randomKey + "):");
+				System.out.println(hm.get(randomKey));  // Exibe a fortuna associada à chave sorteada
+				System.out.println("-----");
+			}
 		}
 
 		public void write(HashMap<Integer, String> hm) throws FileNotFoundException {
@@ -113,7 +126,7 @@ public class Principal_v0 {
 			HashMap<Integer, String> hm = new HashMap<>();
 			fr.parser(hm);
 			fr.read(hm);
-			//fr.write(hm);
+			fr.write(hm);
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
